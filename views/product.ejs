@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title><%= product.name %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eaeaea;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            background: #4a4a4a;
+            color: #fff;
+            padding: 20px 0;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .nav-left, .nav-right {
+            display: flex;
+            align-items: center;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ffcc00;
+        }
+        nav button {
+            margin-left: 15px;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        nav button:hover {
+            background: #218838;
+        }
+        .search-input {
+            margin-left: 15px;
+        }
+        .search-input input {
+            border-radius: 5px 0 0 5px;
+        }
+        .search-input button {
+            border-radius: 0 5px 5px 0;
+        }
+        .product-detail {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        .product-detail img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+        footer {
+            background-color: #4a4a4a;
+            color: #fff;
+            padding: 40px 0;
+            width: 100%;
+            margin-top: auto;
+        }
+        .footer-container {
+            display: flex;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        footer h5 {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <a href="/">PC TTH</a>
+                <a href="/">Trang Chủ</a>
+            </div>
+            <div class="nav-right">
+                <!-- Thanh tìm kiếm -->
+                <form action="/search" method="GET" class="d-flex align-items-center search-input">
+                    <input type="text" name="query" placeholder="Tìm kiếm sản phẩm" class="form-control" aria-label="Search">
+                    <button type="submit" class="btn btn-outline-light ms-2">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                <a href="/cart">
+                    <i class="fas fa-shopping-cart"></i> Giỏ Hàng
+                </a>
+                <% if (user) { %>
+                    <form action="/auth/logout" method="POST" style="display:inline;">
+                        <button type="submit">Đăng Xuất</button>
+                    </form>
+                <% } else { %>
+                    <a href="/auth/login">Đăng Nhập</a>
+                    <a href="/auth/register">Đăng Ký</a>
+                <% } %>
+            </div>
+        </nav>
+    </header>
+    <div class="product-detail">
+        <h2><%= product.name %></h2>
+        <img src="<%= product.image %>" alt="<%= product.name %>">
+        <p>Giá: <%= product.price %> VNĐ</p>
+        <p><strong>Mô tả sản phẩm:</strong> <%= product.description %></p>
+        <% if (user) { %>
+            <form action="/cart/add" method="POST">
+                <input type="hidden" name="productId" value="<%= product._id %>">
+                <button type="submit">Thêm vào giỏ</button>
+            </form>
+        <% } else { %>
+            <button disabled>Vui lòng đăng nhập để đặt hàng</button>
+        <% } %>
+        <br>
+        <a href="/">Quay lại danh mục sản phẩm</a>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div>
+                <h5>VỀ WATCHESSE</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Giới thiệu về Watchesse</a></li>
+                    <li><a href="#">Chính sách chung</a></li>
+                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="#">Chính sách vận chuyển</a></li>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5>CỬA HÀNG</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Cửa hàng Hà Nội</a></li>
+                    <li><a href="#">Cửa hàng TP.HCM</a></li>
+                    <li><a href="#">Cửa hàng Đà Nẵng</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5>LIÊN HỆ HỖ TRỢ</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Hotline: 086 2784 4855</a></li>
+                    <li><a href="#">Hotline: 097 3112 2230</a></li>
+                    <li><a href="#">Hotline: 096 139 5555</a></li>
+                    <li><a href="#">Email: watchesse@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

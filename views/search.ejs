@@ -1,0 +1,37 @@
+<!-- <!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Kết Quả Tìm Kiếm</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Kết Quả Tìm Kiếm</h1>
+        <nav>
+            <a href="/">Trang Chủ</a>
+            <a href="/cart">Giỏ Hàng</a>
+            <a href="/login">Đăng Nhập</a>
+            <a href="/register">Đăng Ký</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Kết Quả Tìm Kiếm</h2>
+        <div class="product-list">
+            <% products.forEach(product => { %>
+                <div class="product-card">
+                    <h3><a href="/product/<%= product._id %>"><%= product.name %></a></h3>
+                    <p>Giá: <%= product.price %> VNĐ</p>
+                    <form action="/cart/add" method="POST">
+                        <input type="hidden" name="productId" value="<%= product._id %>">
+                        <button type="submit">Thêm vào giỏ</button>
+                    </form>
+                </div>
+            <% }) %>
+        </div>
+    </main>
+    <footer>
+        <p>© 2024 Cửa hàng Laptop</p>
+    </footer>
+</body>
+</html> -->
