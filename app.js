@@ -29,11 +29,9 @@ app.use(session({
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const cartRouter = require('./routes/cart');
-const checkoutRouter = require('./routes/checkout');
 
 app.use('/auth', authRouter);
 app.use('/cart', cartRouter);
-app.use('/checkout', checkoutRouter); // Đảm bảo đường dẫn đúng
 app.use('/admin', adminRoutes);
 app.use('/', indexRouter);
 
